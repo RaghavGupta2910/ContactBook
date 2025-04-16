@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            background: #f4f6f9;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #ddd;
+        }
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        form input,
+        form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            background: #2980b9;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            margin-top: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 2rem;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #ecf0f1;
+        }
+
+        .logout {
+            float: right;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a class="logout" href="/logout">Logout</a>
+        <h2>Welcome, {{ current_user.username }}!</h2>
+        <form method="POST">
+            <input type="text" name="name" placeholder="Full Name" required />
+            <input type="text" name="phone" placeholder="Phone Number" required />
+            <input type="email" name="email" placeholder="Email (optional)" />
+            <input type="text" name="institution" placeholder="Institution (optional)" />
+            <input type="text" name="role" placeholder="Role (optional)" />
+            <textarea name="notes" placeholder="Notes about the contact (optional)"></textarea>
+            <button type="submit">Add Contact</button>
+        </form>
+
+        <h3>Your Contacts</h3>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Institution</th>
+                <th>Role</th>
+                <th>Notes</th>
+            </tr>
+            {% for c in contacts %}
+            <tr>
+                <td>{{ c.name }}</td>
+                <td>{{ c.phone }}</td>
+                <td>{{ c.email }}</td>
+                <td>{{ c.institution }}</td>
+                <td>{{ c.role }}</td>
+                <td>{{ c.notes }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+
+</html>
